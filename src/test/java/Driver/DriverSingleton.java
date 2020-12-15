@@ -1,5 +1,6 @@
 package Driver;
 
+import Service.TestDataReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,7 +8,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverSingleton {
     private static WebDriver driver;
-    private static final String ResourcesPath = "src/test/resources";
 
     private DriverSingleton(){}
 
@@ -35,5 +35,9 @@ public class DriverSingleton {
     public static void closeDriver(){
         driver.quit();
         driver = null;
+    }
+
+    public static void openMainPage(){
+        driver.get(TestDataReader.getPage("testdata.item.mainpage"));
     }
 }
