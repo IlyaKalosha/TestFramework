@@ -1,9 +1,9 @@
 package Tests;
 
 import Driver.DriverSingleton;
+import Pages.MainPage;
 import Util.TestListener;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
 @Listeners({TestListener.class})
@@ -18,7 +18,7 @@ public class CommonConditions {
     @BeforeMethod
     public void resetBrowser(){
         DriverSingleton.deleteAllCookies();
-        DriverSingleton.openMainPage();
+        MainPage mainPage = DriverSingleton.openMainPage();
     }
 
     @AfterTest()

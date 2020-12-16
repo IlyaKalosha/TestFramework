@@ -1,5 +1,6 @@
 package Tests;
 
+import Pages.FavouriteListPage;
 import Pages.MainPage;
 import Pages.ProductPage;
 import Service.ItemCreator;
@@ -15,12 +16,12 @@ public class Tests extends CommonConditions {
     public void testLogin() {
         User testUser = UserCreator.withCredentialsFromProperty();
         MainPage mainPage = new MainPage(driver);
-        mainPage.signInElement
-                .loginUser(testUser);
         Assert.assertTrue(
                 "You have wrong creditals",
                 mainPage.signInElement
-                        .isLoggedIn("Kalosha")
+                        .loginUser(testUser)
+                        .signInElement
+                        .isTestUserLoggedIn(testUser)
         );
         mainPage.signInElement
                 .logOutUser();
@@ -34,7 +35,24 @@ public class Tests extends CommonConditions {
         Assert.assertTrue(
                 "There is no such an element",
                 productPage.openCart()
-                        .isThereElement(testItem)
+                            .isThereElement(testItem)
         );
+    }
+
+    @Test
+    public void testAdditionToFavouriteList(){
+        User testUser = UserCreator.withCredentialsFromProperty();
+        MainPage mainPage = new MainPage(driver).signInElement.loginUser(testUser);
+
+        Item testItem = ItemCreator.withFieldsFromProperty();
+        ProductPage productPage = new ProductPage(driver, testItem);
+        productPage.addToFavouriteList();
+        FavouriteListPage favouriteListPage = productPage.openFavouriteList();
+        Assert.assertTrue(
+                "There is no such an element",
+                favouriteListPage.isThereElement(testItem)
+        );
+        favouriteListPage.deleteAddedItem();
+        mainPage.signInElement.logOutUser();
     }
 }

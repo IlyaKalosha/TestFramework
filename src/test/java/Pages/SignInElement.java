@@ -19,20 +19,28 @@ public class SignInElement {
         SignInElement.driver = driver;
     }
 
-    public void loginUser(User user) {
+    public MainPage loginUser(User testUser) {
         driver.findElement(authLink).click();
-        driver.findElement(loginInput).sendKeys(user.getUsername());
-        driver.findElement(passwordInput).sendKeys(user.getPassword());
+        new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOfElementLocated(By.id("auth-modal")));
+        driver.findElement(loginInput).sendKeys(testUser.getUsername());
+        driver.findElement(passwordInput).sendKeys(testUser.getPassword());
         driver.findElement(enterButton).click();
         new WebDriverWait(driver, 15).until(ExpectedConditions.invisibilityOfElementLocated(By.id("auth-modal")));
+        return new MainPage(driver);
     }
 
     public void logOutUser() {
         driver.findElement(signOutButton).click();
     }
 
-    public Boolean isLoggedIn(String userSurname) {
-        if (driver.findElement(By.xpath("//a[contains(text(),\""+userSurname+"\")]"))!=null)
+    public Boolean isTestUserLoggedIn(User testUser) {
+        if (driver.findElement(By.xpath("//a[contains(text(),\""+testUser.getSurname()+"\")]"))!=null)
+            return Boolean.TRUE;
+        else
+            return Boolean.FALSE;
+    }
+    public Boolean isAnyUserLoggedIn() {
+        if (driver.findElement(signOutButton)!=null)
             return Boolean.TRUE;
         else
             return Boolean.FALSE;
