@@ -5,14 +5,24 @@ import java.util.Objects;
 public class Item {
     private String id;
     private String name;
+    private String discountCost;
 
-    public Item(String id, String name){
+    public Item(String id, String name, String discountCost){
         this.id = id;
         this.name = name;
+        this.discountCost = discountCost;
     }
 
     public String getId() {
         return id;
+    }
+
+    public String getDiscountCost() {
+        return discountCost;
+    }
+
+    public void setDiscountCost(String discountCost) {
+        this.discountCost = discountCost;
     }
 
     public void setId(String id) {
@@ -28,10 +38,12 @@ public class Item {
     }
 
     @Override
-    public String toString() {
+    public java.lang.String
+    toString() {
         return "Item{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                "id=" + id +
+                ", name=" + name +
+                ", discountCost=" + discountCost +
                 '}';
     }
 

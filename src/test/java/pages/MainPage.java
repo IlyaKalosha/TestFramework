@@ -25,7 +25,9 @@ public class MainPage {
         new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOfElementLocated(searchWindow));
 
         driver.findElement(searchField).sendKeys(searchStatement);
+        new WebDriverWait(driver, 15).until(ExpectedConditions.elementToBeClickable(searchEnterButton));
         driver.findElement(searchEnterButton).click();
+        new WebDriverWait(driver, 15).until(ExpectedConditions.invisibilityOfElementLocated(searchWindow));
 
         return new ListOfProductsPage(driver);
     }

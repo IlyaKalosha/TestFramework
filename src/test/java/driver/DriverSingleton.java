@@ -21,11 +21,13 @@ public class DriverSingleton {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
                     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                    driver.manage().timeouts().setScriptTimeout(5,TimeUnit.SECONDS);
                 }
                 default:{
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
                     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                    driver.manage().timeouts().setScriptTimeout(5,TimeUnit.SECONDS);
                 }
             }
             driver.manage().window().maximize();

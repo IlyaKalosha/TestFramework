@@ -1,10 +1,9 @@
 package tests;
 
+import model.Card;
 import model.SearchStatement;
-import pages.FavouriteListPage;
-import pages.ListOfProductsPage;
-import pages.MainPage;
-import pages.ProductPage;
+import pages.*;
+import rervice.CardCreator;
 import rervice.ItemCreator;
 import rervice.SearchStatementCreator;
 import rervice.UserCreator;
@@ -15,7 +14,7 @@ import org.testng.annotations.Test;
 
 public class Tests extends CommonConditions {
 
-    @Test
+    /*@Test
     public void testLogin() {
         User testUser = UserCreator.withCredentialsFromProperty();
         MainPage mainPage = new MainPage(driver);
@@ -57,7 +56,9 @@ public class Tests extends CommonConditions {
 
         try{
             testUser = UserCreator.withCredentialsFromProperty();
-            mainPage = new MainPage(driver).signInElement.loginUser(testUser);
+            mainPage = new MainPage(driver)
+                            .signInElement
+                            .loginUser(testUser);
 
             testItem = ItemCreator.withFieldsFromProperty();
             productPage = new ProductPage(driver, testItem);
@@ -70,7 +71,9 @@ public class Tests extends CommonConditions {
             favouriteListPage.deleteAddedItem();
         }
         finally{
-            mainPage.signInElement.logOutUser();
+            mainPage
+                    .signInElement
+                    .logOutUser();
         }
     }
 
@@ -78,6 +81,39 @@ public class Tests extends CommonConditions {
     public void testSearch(){
         MainPage mainPage = new MainPage(driver);
         SearchStatement testSearchStatement = SearchStatementCreator.withFieldsFromProperty();
+
         ListOfProductsPage listOfProductsPage = mainPage.search(testSearchStatement.getStatement());
+        Assert.assertTrue("Search results are empty",
+                            listOfProductsPage
+                                    .getSearchResults(testSearchStatement));
+    }
+
+    @Test
+    public void testDiscount(){
+        Item testItem = ItemCreator.withFieldsFromProperty();
+        ProductPage productPage = new ProductPage(driver, testItem);
+
+        productPage.addToCart();
+        Assert.assertEquals(
+                "There is no such an element",
+                testItem.getDiscountCost(),
+                productPage.openCart()
+                        .getCurrentCost()
+        );
+    }*/
+
+    @Test
+    public void testPayment(){
+        Card testCard = CardCreator.withFieldsFromProperty();
+        User testUser = UserCreator.withCard(testCard);
+
+        String errorCode = new BillPage(driver)
+                                                .openBillPage()
+                                                .login(testUser)
+                                                .enterValue(testUser)
+                                                .pay(testUser);
+        Assert.assertEquals("Cart is not valid",
+                                    testCard.getErrorCode(),
+                                    errorCode);
     }
 }

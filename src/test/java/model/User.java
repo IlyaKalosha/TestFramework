@@ -6,11 +6,27 @@ public class User {
     private String username;
     private String password;
     private String surname;
+    private String faberlicMoney;
+    public Card card;
+    private String email;
 
-    public User(String username, String password, String surname) {
+    public User(String username, String password, String surname, String faberlicMoney) {
         this.username = username;
         this.password = password;
         this.surname = surname;
+        this.faberlicMoney = faberlicMoney;
+    }
+    public User(String username, String password, String surname, String faberlicMoney, Card card, String email) {
+        this.username = username;
+        this.password = password;
+        this.surname = surname;
+        this.faberlicMoney = faberlicMoney;
+        this.card = card;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getUsername() {
@@ -32,6 +48,14 @@ public class User {
         this.password = password;
     }
 
+    public String getFaberlicMoney() {
+        return faberlicMoney;
+    }
+
+    public void setFaberlicMoney(String faberlicMoney) {
+        this.faberlicMoney = faberlicMoney;
+    }
+
     public void setSurname(String surname) {
 
         this.surname = surname;
@@ -47,6 +71,7 @@ public class User {
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", surname='" + surname + '\'' +
+                ", faberlicMoney='" + faberlicMoney + '\'' +
                 '}';
     }
 
