@@ -1,10 +1,11 @@
-package Pages;
+package PageElements;
 
 import model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.MainPage;
 
 public class SignInElement {
     protected static WebDriver driver;
@@ -14,6 +15,7 @@ public class SignInElement {
     private final By loginInput = By.id("j_username");
     private final By passwordInput = By.id("j_password");
     private final By enterButton = By.xpath("//button[contains(@class,\"auth\")]");
+    private final By surnameField = By.xpath("//a[contains(@class,\"ml-3 mr-1 ml-lg-1 js-account-menu\")]");
 
     public SignInElement(WebDriver driver) {
         SignInElement.driver = driver;
@@ -33,11 +35,8 @@ public class SignInElement {
         driver.findElement(signOutButton).click();
     }
 
-    public Boolean isTestUserLoggedIn(User testUser) {
-        if (driver.findElement(By.xpath("//a[contains(text(),\""+testUser.getSurname()+"\")]"))!=null)
-            return Boolean.TRUE;
-        else
-            return Boolean.FALSE;
+    public String getUserSurname() {
+        return driver.findElement(surnameField).getText();
     }
     public Boolean isAnyUserLoggedIn() {
         if (driver.findElement(signOutButton)!=null)

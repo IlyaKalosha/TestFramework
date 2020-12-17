@@ -1,5 +1,6 @@
-package Pages;
+package pages;
 
+import PageElements.SignInElement;
 import model.Item;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

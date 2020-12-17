@@ -1,8 +1,8 @@
-package Tests;
+package tests;
 
-import Driver.DriverSingleton;
-import Pages.MainPage;
-import Util.TestListener;
+import driver.DriverSingleton;
+import pages.MainPage;
+import util.TestListener;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 

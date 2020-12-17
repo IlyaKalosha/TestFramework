@@ -1,7 +1,7 @@
-package Driver;
+package driver;
 
-import Pages.MainPage;
-import Service.TestDataReader;
+import pages.MainPage;
+import rervice.TestDataReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -43,7 +43,7 @@ public class DriverSingleton {
     }
 
     public static MainPage openMainPage(){
-        driver.get(TestDataReader.getPage("testdata.item.mainpage"));
+        driver.get(TestDataReader.getPage("testdata.page.mainpage"));
         return new MainPage(driver);
     }
 }

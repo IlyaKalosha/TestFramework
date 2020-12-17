@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import model.Item;
 import org.openqa.selenium.By;
@@ -13,15 +13,19 @@ public class FavouriteListPage {
     private final By deleteFromFavouriteListButton = By.xpath("//button[contains(@class,\"inactive\")]");
 
     public FavouriteListPage(WebDriver driver) {
-        this.driver = driver;
+        FavouriteListPage.driver = driver;
     }
 
-    public Boolean isThereElement(Item testItem) {
-        List<WebElement> cartList = driver.findElements(By.cssSelector("[data-product=\""+testItem.getId()+"\"]"));
-        if (cartList.size() > 0)
-            return Boolean.TRUE;
-        else
-            return Boolean.FALSE;
+    public boolean isThereElement(Item testItem) {
+        List<WebElement> favouriteList = driver.findElements(By.xpath("//*[@class=\"name\"]"));
+        if (!favouriteList.isEmpty())
+            for (WebElement item:
+                    favouriteList) {
+                if(item.getText().contains(testItem.getName())){
+                    return true;
+                }
+            }
+        return false;
     }
 
     public void deleteAddedItem(){
