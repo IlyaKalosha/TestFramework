@@ -25,4 +25,11 @@ public class UserCreator {
                 card,
                 TestDataReader.getUser(email));
     }
+    public static User withEmptyPass(){
+        return new User(TestDataReader.getUser(userName),
+                "",
+                TestDataReader.getUser(userSurname),
+                TestDataReader.getUser(faberlicMoney)
+                );
+    }
 }

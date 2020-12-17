@@ -14,6 +14,7 @@ public class MainPage {
     private final By searchWindow = By.xpath("//div[contains(@class,\"js-searchbox\")]");
     private final By searchField = By.xpath("//input[contains(@class,\"search-group\")]");
     private final By searchEnterButton = By.xpath("//button[contains(text(),\"Найти\")]");
+    private final By language = By.xpath("//span[contains(@class,\"header__geo-item mr-lg-2 icn-internet text-uppercase box-link js-header-lang\")]");
 
     public MainPage(WebDriver driver) {
         MainPage.driver = driver;
@@ -31,4 +32,18 @@ public class MainPage {
 
         return new ListOfProductsPage(driver);
     }
+
+    public MainPage changeLang(){
+        driver.findElement(language).click();
+        new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOfElementLocated(By.id("lang-popover")));
+
+        driver.findElement(By.xpath("//*[contains(@data-iso,\"en\")]")).click();
+        return this;
+    }
+
+    public String getMenuLang(){
+        return driver.findElement(By.id("auth-link")).getText();
+    }
+
+
 }

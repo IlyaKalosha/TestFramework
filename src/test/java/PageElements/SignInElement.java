@@ -38,10 +38,7 @@ public class SignInElement {
     public String getUserSurname() {
         return driver.findElement(surnameField).getText();
     }
-    public Boolean isAnyUserLoggedIn() {
-        if (driver.findElement(signOutButton)!=null)
-            return Boolean.TRUE;
-        else
-            return Boolean.FALSE;
+    public String getLogoutWord() {
+        return driver.findElement(authLink).getText();
     }
 }
